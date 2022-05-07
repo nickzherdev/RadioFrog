@@ -3,6 +3,10 @@ Simple arduino-based RF transmitter and receiver using 433 MHz modules
 
 # Plan
 
+- Switch to 8 MHz and 3.3 v power
+- Add antenna 13 cm
+- 
+
 ## Transmitter
 
 - MX-RM-5v
@@ -29,6 +33,29 @@ Digispark – плата на базе ATtiny85, загрузка в котор�
 
 https://digistump.com/wiki/digispark/tutorials/connecting
 
+# Characteristic
+
+## Receiver
+    Напряжение питания: 5 В
+    Несущая частота: 433 МГц
+    Максимальная пропускная способность: 5 кб/сек
+    Потребляемый ток: 4,5 мА
+    Чувствительность: −106…-110 дБм
+    Диапазон рабочих температур: −20…+80 °C
+
+## Transmitter
+    Напряжение питания: 3–12 В
+    Несущая частота: 433 МГц
+    Максимальная пропускная способность: 8 кб/сек
+    Потребляемый ток: 8 мА
+    Выходная мощность: 32 мВт
+    Диапазон рабочих температур: −20…+80 °C
+
+## Digispark Attiny85 (both)
+    https://iarduino.ru/lib/eef404f668a0834ace20ad691c09fcba.pdf
+    
+    ATtiny25/45/85: 0 – 10 MHz @ 2.7 - 5.5V, 0 - 20 MHz @ 4.5 - 5.5V
+
 # Troobleshooting
 
 sudo apt-get install libusb-0.1-4
@@ -38,7 +65,5 @@ Compile micronucleus (to resolve v2.2 of the board) and replace the original one
 /home/$USER/.arduino15/packages/digistump/tools/micronucleus/2.0a4
 
 https://startingelectronics.org/tutorials/arduino/digispark/digispark-linux-setup/
-
-
+https://digistump.com/wiki/digispark/tutorials/connecting
 https://digistump.com/wiki/digispark/tutorials/linuxtroubleshooting
-
