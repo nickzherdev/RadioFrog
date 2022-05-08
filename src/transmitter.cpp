@@ -1,15 +1,16 @@
 #include <Arduino.h>
 
-void setup() {                
-  pinMode(0, OUTPUT);      // LED on Model B
-  pinMode(1, OUTPUT);      // LED on Model A   
+#include <Gyver433.h>
+Gyver433_TX<1> tx;  // указали пин
+void setup() {
 }
-
+char data[] = "Hello from #xx"; // строка для отправки
+byte count = 0;                 // счётчик для отправки
 void loop() {
-  digitalWrite(0, HIGH);   // Turn the LED on
-  digitalWrite(1, HIGH);
-  delay(1000);             // Wait for a second
-  digitalWrite(0, LOW);    // Turn the LED off
-  digitalWrite(1, LOW); 
-  delay(1000);             // Wait for a second
+  // добавляем счётчик в строку
+  data[12] = (count / 10) + '0';
+  data[13] = (count % 10) + '0';
+  if (++count >= 100) count = 0;
+  tx.sendData(data);
+  delay(100);
 }

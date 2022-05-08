@@ -1,15 +1,22 @@
-#include <Arduino.h>
+// обмен сырыми данными без CRC
+// отправляет пример raw_tx
+// принимаем без прерывания! для примера
 
-void setup() {                
-  pinMode(0, OUTPUT);      // LED on Model B
-  pinMode(1, OUTPUT);      // LED on Model A   
+//#define G433_SPEED 1000   // скорость 100-10000 бит/с, по умолч. 2000 бит/с
+
+#include <Gyver433.h>
+Gyver433_RX<2, 20, G433_NOCRC> rx;  // буфер 20 байт
+
+void setup() {
+  Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(0, HIGH);   // Turn the LED on
-  digitalWrite(1, HIGH);
-  delay(1000);             // Wait for a second
-  digitalWrite(0, LOW);    // Turn the LED off
-  digitalWrite(1, LOW); 
-  delay(1000);             // Wait for a second
+  // этот тикер нужно вызывать как можно чаще
+  // лучше принимать в прерывании, см. пример demo
+  if (rx.tick()) {
+    // выводим сырые байты в порт
+    Serial.write(rx.buffer, rx.size);
+    Serial.println();
+  }
 }
